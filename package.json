@@ -1,0 +1,30 @@
+{
+  "name": "de.maxbethke.cv",
+  "version": "1.0.0",
+  "description": "Personal CV Generator",
+  "main": "server.js",
+  "scripts": {
+    "sass-watch": "node-sass style.sass public/css/style.css --watch",
+    "sass": "node-sass style.sass public/css/style.css",
+    "dev": "node server.js",
+    "update": "node update.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maxbethke/cv.git"
+  },
+  "author": "Maximilian Bethke",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maxbethke/cv/issues"
+  },
+  "homepage": "https://github.com/maxbethke/cv#readme",
+  "devDependencies": {
+    "node-sass": "^7.0.3"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jquery": "^3.6.2"
+  }
+}

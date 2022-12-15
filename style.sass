@@ -1,0 +1,168 @@
+$color-primary: #0000FF
+
+*
+  box-sizing: border-box
+
+body
+  margin: unset
+  font-family: Arial
+  color: #000000AA
+
+.paper
+  width: 210mm
+  height: 297mm
+  padding: 1cm
+
+.container
+  display: grid
+  grid-template-columns: 3fr 7fr
+  grid-gap: 30px
+  height: 100%
+
+.sidebar
+  display: flex
+  flex-direction: column
+  gap: 1.5rem
+  background: rgba($color-primary, .05)
+  padding: 1cm 18px
+  margin: -1cm 0
+  line-height: 1.5rem
+  overflow-x: clip
+  &__section
+    font-size: 0.9em
+    .section-heading
+      font-size: 1.1rem
+      color: #000000CC
+      text-transform: uppercase
+      font-weight: 800
+      margin-bottom: .5em
+
+.title
+  text-transform: uppercase
+  font-size: 1.8rem
+  line-height: 1.3em
+  &__name
+    color: $color-primary
+    font-weight: 800
+    padding-bottom: 0.5em
+    letter-spacing: .05em
+    line-height: 1.1em
+  &__position
+    font-weight: 500
+    color: #000000CC
+    font-size: 0.7em
+    line-height: 1.3em
+
+.skills
+  display: flex
+  flex-direction: column
+  gap: 10px
+  width: calc(185px + 18px)
+  margin-right: -18px
+  &__row
+    display: flex
+    flex-direction: row
+    gap: 10px
+  &__skill
+    position: relative
+    background: $color-primary
+    color: white
+    padding: 3px 8px
+    border-radius: 5px
+    white-space: nowrap
+    &:nth-child(n+3)
+      background: lightgray
+    &--favorite
+      @extend .skills__skill
+      outline: 2px solid darkgoldenrod
+      color: gold
+      .fas
+        color: gold
+        font-size: 1.2em
+        position: absolute
+        top: -2mm
+        right: -2.5mm
+
+.language
+  position: relative
+  margin-bottom: 15px
+  &::before
+    position: absolute
+    top: 100%
+    right: 0
+    bottom: -10px
+    left: 0
+    content: ' '
+    background: #00000011
+    border-radius: 5px
+  &--english
+    @extend .language
+    &::after
+      @extend .language::before
+      background: $color-primary
+      right: 10%
+  &--german
+    @extend .language
+    &::after
+      @extend .language::before
+      background: $color-primary
+
+.social-detail
+  display: flex
+  gap: 10px
+  align-items: center
+  i
+    font-size: 1.2rem
+    color: #000000CC
+
+.main
+  .section
+    font-size: 0.9em
+    line-height: 1.5em
+    .section-header
+      display: flex
+      .section-subheading
+        margin-left: auto
+    .section-heading
+      font-size: 1.1rem
+      text-transform: uppercase
+      font-weight: 800
+      margin-bottom: .5em
+      color: $color-primary
+    &--experience,
+    &--projects
+      @extend .section
+  .section + .section
+    margin-top: 20px
+    padding-top: 20px
+    border-top: 5px solid #00000005
+
+.experience
+  display: grid
+  grid-template-columns: 1fr 1fr
+  grid-gap: 20px
+  &__item
+    .item__title
+      text-transform: uppercase
+      font-weight: 800
+    .item__details
+      display: flex
+      flex-direction: column
+      .fas
+        width: 1em
+
+.projects
+  display: grid
+  grid-template-columns: 1fr 1fr
+  grid-gap: 20px
+  .project
+    display: inline-flex
+    flex-direction: column
+    background: #00000011
+    padding: 10px
+    &__techs
+      font-style: italic
+    &__title
+      font-weight: 600
+    &__time
+      margin-top: auto

@@ -1,0 +1,7 @@
+/.env
+/public/experience.json
+/public/softskills.json
+/public/projects.json
+/public/techstack.json
+/public/css/
+/node_modules/
