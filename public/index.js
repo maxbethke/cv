@@ -20,39 +20,15 @@ async function querySkills() {
         return 1
     })
 
-    const rows = []
-    const rowsAmount = 6
-    let nextMinorRow = 1
-
-    $.each(res, (iii, skill) => {
-        // fill major skills
-        for (let i = 1; i <= rowsAmount; i++) {
-            if (undefined === rows[i]) rows[i] = []
-            if (rows[i].length < 2) {
-                rows[i].push(skill)
-                return
-            }
+    res.map(item => {
+        const skillItem = $(`<div>${item.name}</div>`)
+        let skillClass = 'skills__skill'
+        if(item.starred) {
+            skillItem.append('<i class="fas fa-star"></i>')
+            skillClass += '--favorite'
         }
-
-        // fill minor skills
-        rows[nextMinorRow].push(skill)
-        nextMinorRow++
-        if (nextMinorRow > rowsAmount) nextMinorRow = 1
-    })
-
-    rows.map(row => {
-        const rowOutput = $('<div class="skills__row"></div>')
-        row.map(item => {
-            const skillItem = $(`<div class="skills__skill">${item.name}</div>`)
-            let skillClass = 'skills__skill'
-            if(item.starred) {
-                skillItem.append('<i class="fas fa-star"></i>')
-                skillClass += '--favorite'
-            }
-            skillItem.addClass(skillClass)
-            rowOutput.append(skillItem)
-        })
-        $('.skills').append(rowOutput)
+        skillItem.addClass(skillClass)
+        $('.skills').append(skillItem)
     })
 }
 
@@ -73,7 +49,7 @@ async function injectExperience() {
                 <div class="item__title">${item.role}</div>
                 <div class="item__details">
                     <span><i class="fas fa-building"></i> ${item.company}</span>
-                    <span><i class="fas fa-map-marker-alt   y"></i> ${item.location}</span>
+                    <span><i class="fas fa-map-marker-alt"></i> ${item.location}</span>
                     <span><i class="fas fa-calendar"></i> ${item.from} - ${item.to}</span> 
                 </div>
             </div>
@@ -83,7 +59,6 @@ async function injectExperience() {
 
 async function queryProjects() {
     const res = await fetch('projects')
-    // const res = projMock
     res.sort((a, b) => {
         console.log(a, b)
         console.log(Date(a.until))
@@ -95,9 +70,12 @@ async function queryProjects() {
         const techs = item.techstack.map(tech => tech.name).join(', ')
         $('.projects').append($(`
             <divk class="project">
-                <div class="project__title">${item.name}</div>
+                <div class="project__title">${item.role.text} @ ${item.name}</div>
                 <div class="project__techs">
                     ${techs}
+                </div>
+                <div class="project__description">
+                    ${item.contentBlocks[1].content[0].plain_text}
                 </div>
                 <div class="project__time">
                     <i class="fas fa-calendar"></i>

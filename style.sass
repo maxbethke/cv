@@ -8,15 +8,16 @@ body
   font-family: Arial
   color: #000000AA
 
-.paper
+.page
   width: 210mm
   height: 297mm
   padding: 1cm
 
 .container
   display: grid
+  grid-template-areas: "sidebar-top intro" "standout standout" "sidebar-bottom main"
   grid-template-columns: 3fr 7fr
-  grid-gap: 30px
+  grid-template-rows: 186px max-content
   height: 100%
 
 .sidebar
@@ -24,8 +25,7 @@ body
   flex-direction: column
   gap: 1.5rem
   background: rgba($color-primary, .05)
-  padding: 1cm 18px
-  margin: -1cm 0
+  padding: 18px
   line-height: 1.5rem
   overflow-x: clip
   &__section
@@ -36,6 +36,19 @@ body
       text-transform: uppercase
       font-weight: 800
       margin-bottom: .5em
+  &--top,
+  &--bottom
+    @extend .sidebar
+  &--top
+    grid-area: sidebar-top
+    margin-top: -1cm
+    padding-top: 1cm
+    padding-bottom: 30px
+  &--bottom
+    grid-area: sidebar-bottom
+    margin-bottom: -1cm
+    padding-bottom: 1cm
+    padding-top: 30px
 
 .title
   text-transform: uppercase
@@ -55,23 +68,16 @@ body
 
 .skills
   display: flex
-  flex-direction: column
+  flex-wrap: wrap
   gap: 10px
-  width: calc(185px + 18px)
-  margin-right: -18px
-  &__row
-    display: flex
-    flex-direction: row
-    gap: 10px
   &__skill
+    display: inline-block
     position: relative
     background: $color-primary
     color: white
     padding: 3px 8px
     border-radius: 5px
     white-space: nowrap
-    &:nth-child(n+3)
-      background: lightgray
     &--favorite
       @extend .skills__skill
       outline: 2px solid darkgoldenrod
@@ -115,29 +121,55 @@ body
     font-size: 1.2rem
     color: #000000CC
 
-.main
+.standout
+  grid-area: standout
+  background: rgba($color-primary, .3)
+  display: grid
+  grid-template-columns: 3fr 7fr
+  padding: 18px
   .section
-    font-size: 0.9em
-    line-height: 1.5em
-    .section-header
-      display: flex
-      .section-subheading
-        margin-left: auto
-    .section-heading
-      font-size: 1.1rem
-      text-transform: uppercase
-      font-weight: 800
-      margin-bottom: .5em
-      color: $color-primary
-    &--experience,
-    &--projects
-      @extend .section
-  .section + .section
-    margin-top: 20px
-    padding-top: 20px
-    border-top: 5px solid #00000005
+    @extend .sidebar__section
+  .section:last-child
+    margin-left: 30px
+  .picture
+    width: 100%
+    transform: scale(1.5)
+    &__frame
+      border-radius: 20px
+      overflow: clip
+      height: 100%
+      margin-right: 18px
 
-.experience
+.section
+  font-size: 0.9em
+  line-height: 1.5em
+  .section-header
+    display: flex
+    .section-subheading
+      margin-left: auto
+  .section-heading
+    font-size: 1.1rem
+    text-transform: uppercase
+    font-weight: 800
+    margin-bottom: .5em
+    color: $color-primary
+  &--experience,
+  &--projects,
+  &--education
+    @extend .section
+.section + .section
+  margin-top: 20px
+  padding-top: 20px
+  border-top: 5px solid #00000005
+.page:first-of-type .main
+  padding: 30px 0 0 30px
+
+.intro
+  grid-area: intro
+  padding: 0 0 30px 30px
+
+.experience,
+.education
   display: grid
   grid-template-columns: 1fr 1fr
   grid-gap: 20px
@@ -150,19 +182,31 @@ body
       flex-direction: column
       .fas
         width: 1em
+.education
+  display: flex
+  flex-direction: column
+  gap: 20px
 
 .projects
   display: grid
   grid-template-columns: 1fr 1fr
   grid-gap: 20px
   .project
-    display: inline-flex
+    display: flex
+    gap: 1.8ch
     flex-direction: column
     background: #00000011
     padding: 10px
+    border-radius: 0 20px 0 20px
+    overflow: clip
     &__techs
       font-style: italic
     &__title
-      font-weight: 600
+      font-weight: 800
+      background: rgba($color-primary, .3)
+      margin: -10px
+      padding: 10px
+      color: $color-primary
     &__time
       margin-top: auto
+      text-align: right
