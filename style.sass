@@ -10,7 +10,7 @@ body
 
 .page
   width: 210mm
-  height: 297mm
+  height: 296mm
   padding: 1cm
 
 .container
@@ -126,7 +126,8 @@ body
   background: rgba($color-primary, .3)
   display: grid
   grid-template-columns: 3fr 7fr
-  padding: 18px
+  padding: 18px calc(1cm + 18px) 18px 18px
+  margin: 0 -1cm 0 0
   .section
     @extend .sidebar__section
   .section:last-child
